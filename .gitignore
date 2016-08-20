@@ -1,0 +1,6 @@
+platforms/android/*
+plugins/cordova-plugin-whitelist/*
+plugins/cordova-plugin-sms/*
+plugins/cordova-plugin-android-permissions/*
+plugins/cordova-plugin-statusbar/*
+node_modules/

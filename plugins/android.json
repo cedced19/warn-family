@@ -1,0 +1,24 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        },
+        "cordova-plugin-sms": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        }
+    },
+    "dependent_plugins": {}
+}
