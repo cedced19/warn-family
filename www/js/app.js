@@ -14,14 +14,41 @@ phonon.options({
 var language = localStorage.getItem('language') || (window.navigator.userLanguage || window.navigator.language).split('-')[0];
 phonon.updateLocale(language);
 
+// Request permission with success callback and sentence
+var requestPermission = function (permission, sentence, cb) {
+  var errorCallback = function() {
+    phonon.i18n().get([sentence, 'warning', 'ok'], function(values) {
+      phonon.alert(values[sentence], values['warning'], false, values['ok']);
+    });
+  };
+
+  cordova.plugins.permissions.requestPermission(permission,
+  function(status) {
+    if(!status.hasPermission) errorCallback();
+    cb();
+  }, errorCallback);
+};
+
 phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, readyDelay: 0}, function(activity) {
 
     activity.onReady(function () {
-      
+
     });
 });
 
+phonon.navigator().on({page: 'number-list', content: 'number-list.html', preventClose: false, readyDelay: 0}, function(activity) {
 
+    activity.onReady(function () {
+      cordova.plugins.permissions.hasPermission(cordova.plugins.permissions.SEND_SMS, function () {
+        if(!status.hasPermission) {
+          requestPermission(cordova.plugins.permissions.SEND_SMS, 'no_permission_sms', function () {
+
+          });
+        }
+      }, null);
+
+    });
+});
 
 phonon.navigator().on({ page: 'language', content: 'language.html', preventClose: false, readyDelay: 0 }, function (activity) {
 

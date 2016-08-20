@@ -10,5 +10,8 @@
   "language_select": "Choose your language, you can choose from seven different languages.",
   "language_btn": "Update your language",
   "language_confirm": "The language has just been updated.",
-  "question_sure": "Are you sure?"
+  "question_sure": "Are you sure?",
+  "contacts_list": "Contacts list to warn",
+  "settings": "Settings",
+  "no_permission_sms": "The application hasn't received the permission to send SMS."
 }

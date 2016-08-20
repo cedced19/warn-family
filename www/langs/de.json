@@ -10,5 +10,8 @@
   "language_select": "Wählen Sie ihre Sprache. Sie können zwischen sieben verschiedenen Sprachen wählen.",
   "language_btn": "Ändern Sie ihre Sprache",
   "language_confirm": "Die Sprache hat gerade aktualisiert.",
-  "question_sure": "Bist du sicher?"
+  "question_sure": "Bist du sicher?",
+  "contacts_list": "Kontaktliste zu benachrichtigen",
+  "settings": "Die Parameter",
+  "no_permission_sms": "Die Anwendung hat die Erlaubnis nicht erhalten zu SMS senden."
 }

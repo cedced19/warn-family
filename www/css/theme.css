@@ -1,4 +1,10 @@
 /*
+ * Fix alert bug
+ */
+.btn.primary.btn-confirm {
+  background-color: inherit !important;
+}
+/*
  * App Pages
  */
 .app-page {
@@ -38,10 +44,12 @@
   height: 3px;
   background-color: #D24D57;
 }
-/*
- * Panels
+/*/*
+ * Fix alert bug
  */
-.panel,
+.btn.primary.btn-confirm {
+  background-color: inherit !important;
+}
 .panel-full {
   background-color: #fff;
 }
