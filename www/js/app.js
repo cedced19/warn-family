@@ -16,23 +16,55 @@ phonon.updateLocale(language);
 
 // Request permission with success callback and sentence
 var requestPermission = function (permission, sentence, cb) {
-  var errorCallback = function() {
-    phonon.i18n().get([sentence, 'warning', 'ok'], function(values) {
-      phonon.alert(values[sentence], values['warning'], false, values['ok']);
+  var errorCallback = function () {
+    phonon.i18n().get([sentence, 'error', 'ok'], function(values) {
+      phonon.alert(values[sentence] + permission, values['error'], false, values['ok']);
+      cb(true);
     });
   };
-
-  cordova.plugins.permissions.requestPermission(permission,
-  function(status) {
-    if(!status.hasPermission) errorCallback();
-    cb();
+  cordova.plugins.permissions.requestPermission(permission, function (status) {
+    console.log(status)
+      if(!status.hasPermission) errorCallback();
+      cb(null);
   }, errorCallback);
 };
 
 phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, readyDelay: 0}, function(activity) {
 
-    activity.onReady(function () {
+    activity.onCreate(function () {
+      var checkPermission = function (options, cb) {
+        console.log(cordova.plugins.permissions[options.permission])
+          cordova.plugins.permissions.hasPermission(cordova.plugins.permissions[options.permission], function (status) {
+            console.log(status)
+            if(!status.hasPermission) {
+              requestPermission(cordova.plugins.permissions[options.permission], options.errorSentence, cb);
+            } else {
+              cb(null);
+            }
+          }, null);
+      };
+      // Request read contact permission
+      var enableBtn = document.getElementById('enable-btn');
+      enableBtn.onclick = function () {
+        asyncWaterfall([
+          function (cb) {
+            checkPermission({
+              permission: 'ACCESS_FINE_LOCATION',
+              errorSentence: 'no_other_permissions'
+            }, cb);
+          },
+          function (cb) {
+            checkPermission({
+              permission: 'SEND_SMS',
+              errorSentence: 'no_other_permissions'
+            }, cb);
+          }
+        ], function () {
+          if (!err) {
 
+          }
+        });
+      };
     });
 });
 
@@ -92,9 +124,7 @@ phonon.navigator().on({page: 'number-list', content: 'number-list.html', prevent
           contacts.push(contact);
           localStorage.setItem('contacts', JSON.stringify(contacts));
           showContact(contact, contacts.length-1);
-        }, function(){
-
-        });
+        }, null);
       };
 
       if (Array.isArray(contacts)) {

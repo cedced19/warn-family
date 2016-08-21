@@ -13,11 +13,10 @@
   "question_sure": "Are you sure?",
   "contacts_list": "Contacts list to warn",
   "settings": "Settings",
-  "no_sms_permission": "The application hasn't received the permission to send SMS.",
-  "request_sms_permission": "You must allow the application to send SMS to make it work.",
   "request_permission": "Allow the application",
   "no_contacts_permission": "The application hasn't received the permission to access to the contacts.",
   "request_contacts_permission": "You must allow the application to access to the contacts to make it work.",
   "add_contact": "Add a contact",
-  "selected_contacts": "Selected contacts"
+  "selected_contacts": "Selected contacts",
+  "enable_warning": "Enable the system"
 }

@@ -21,6 +21,9 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
         }
     },
     "dependent_plugins": {
