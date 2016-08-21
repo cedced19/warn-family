@@ -38,15 +38,68 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
 
 phonon.navigator().on({page: 'number-list', content: 'number-list.html', preventClose: false, readyDelay: 0}, function(activity) {
 
-    activity.onReady(function () {
-      cordova.plugins.permissions.hasPermission(cordova.plugins.permissions.SEND_SMS, function () {
-        if(!status.hasPermission) {
-          requestPermission(cordova.plugins.permissions.SEND_SMS, 'no_permission_sms', function () {
+    activity.onCreate(function () {
+      var addContactBtn = document.getElementById('add-contact-btn');
+      var ul = document.getElementById('contacts-list');
+      var contacts = JSON.parse(localStorage.getItem('contacts'));
 
-          });
+      var showContact = function (value, index) {
+        var li = document.createElement('li');
+        li.setAttribute('id', 'contact-' + index);
+
+        var a = document.createElement('a');
+        a.className = 'pull-right icon icon-close';
+        a.on('click', function () {
+          ul.removeChild(document.getElementById('contact-' + index));
+          contacts.splice(contacts.indexOf(value), 1);
+          localStorage.setItem('contacts', JSON.stringify(contacts));
+        });
+        li.appendChild(a);
+
+        var span = document.createElement('span');
+        span.className = 'padded-list';
+        span.appendChild(document.createTextNode(value.name));
+        li.appendChild(span);
+
+        ul.appendChild(li);
+      };
+
+      // Request read contact permission
+      cordova.plugins.permissions.hasPermission(cordova.plugins.permissions.READ_CONTACTS, function (status) {
+        if(!status.hasPermission) {
+          var informationDiv = document.getElementById('request-contacts-permission');
+          var requestBtn = document.getElementById('request-contacts-permission-btn');
+          informationDiv.style.display = 'block';
+          addContactBtn.style.display = 'none';
+          requestBtn.onclick = function () {
+            requestPermission(cordova.plugins.permissions.READ_CONTACTS, 'no_contacts_permission', function () {
+              informationDiv.style.display = 'none';
+              addContactBtn.style.display = 'block';
+            });
+          }
         }
       }, null);
 
+      addContactBtn.onclick = function () {
+        navigator.contacts.pickContact(function(contact){
+          if (!Array.isArray(contacts)) {
+            contacts = [];
+          }
+          var contact = {
+            phone: contact.phoneNumbers[0].value,
+            name: contact.displayName
+          };
+          contacts.push(contact);
+          localStorage.setItem('contacts', JSON.stringify(contacts));
+          showContact(contact, contacts.length-1);
+        }, function(){
+
+        });
+      };
+
+      if (Array.isArray(contacts)) {
+        contacts.forEach(showContact);
+      }
     });
 });
 

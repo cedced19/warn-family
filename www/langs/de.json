@@ -13,5 +13,11 @@
   "question_sure": "Bist du sicher?",
   "contacts_list": "Kontaktliste zu benachrichtigen",
   "settings": "Die Parameter",
-  "no_permission_sms": "Die Anwendung hat die Erlaubnis nicht erhalten zu SMS senden."
+  "no_sms_permission": "Die Anwendung hat die Erlaubnis nicht erhalten zu SMS senden.",
+  "request_sms_permission": "Sie müssen die Anwendung erlauben SMS zu senden, damit es funktioniert.",
+  "request_permission": "Erlauben die Anwendung",
+  "no_contacts_permission": "Die Anwendung hat die Erlaubnis nicht erhalten zu die Kontakte erreichen.",
+  "request_contacts_permission": "Sie müssen die Anwendung erlauben SMS zu die Kontakte erreichen, damit es funktioniert.",
+  "add_contact": "Kontakt hinzufügen"
+  "selected_contacts": "Ausgewählte Kontakte"
 }

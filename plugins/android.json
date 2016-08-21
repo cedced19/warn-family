@@ -18,7 +18,14 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
+        }
+    }
 }

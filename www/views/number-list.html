@@ -8,6 +8,16 @@
     <div class="content">
         <div class="padded-full">
             <h1 data-i18n="text: contacts_list"></h1>
+
+            <div id="request-contacts-permission" style="display: none;">
+              <p data-i18n="text: request_contacts_permission"></p>
+              <button id="request-contacts-permission-btn" class="btn primary" data-i18n="text: request_permission"></button>
+            </div>
+
+            <button class="btn" id="add-contact-btn" data-i18n="text: add_contact"></button>
         </div>
+        <ul class="list" id="contacts-list">
+          <li class="divider" data-i18n="text: selected_contacts"></li>
+        </ul>
     </div>
 </number-list>
