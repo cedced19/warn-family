@@ -18,5 +18,6 @@
   "request_contacts_permission": "Vous devez permettre à l'application d'accéder aux contacts pour qu'elle fonctionne.",
   "add_contact": "Ajouter un contact",
   "selected_contacts": "Contacts sélectionnés",
-  "enable_warning": "Activer le système d'alerte"
+  "enable_warning": "Activer le système d'alerte",
+  "no_contact_selected": "Aucun contact séléctionné."
 }

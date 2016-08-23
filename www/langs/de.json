@@ -18,5 +18,6 @@
   "request_contacts_permission": "Sie müssen die Anwendung erlauben SMS zu senden, um die GPS zuzugreifen und halten Sie das Telefon aktiv, damit es funktioniert.",
   "add_contact": "Kontakt hinzufügen",
   "selected_contacts": "Ausgewählte Kontakte",
-  "enable_warning": "Aktivieren Sie das Warnsystem"
+  "enable_warning": "Aktivieren Sie das Warnsystem",
+  "no_contact_selected": "Keine ausgewählte Kontakt."
 }

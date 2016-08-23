@@ -18,5 +18,6 @@
   "request_contacts_permission": "You must allow the application to access to the contacts to make it work.",
   "add_contact": "Add a contact",
   "selected_contacts": "Selected contacts",
-  "enable_warning": "Enable the system"
+  "enable_warning": "Enable the system",
+  "no_contact_selected": "No contact selected."
 }

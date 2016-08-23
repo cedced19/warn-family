@@ -18,7 +18,7 @@ phonon.updateLocale(language);
 var requestPermission = function (permission, sentence, cb) {
   var errorCallback = function () {
     phonon.i18n().get([sentence, 'error', 'ok'], function(values) {
-      phonon.alert(values[sentence] + permission, values['error'], false, values['ok']);
+      phonon.alert(values[sentence], values['error'], false, values['ok']);
       cb(true);
     });
   };
@@ -58,8 +58,18 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
               permission: 'SEND_SMS',
               errorSentence: 'no_other_permissions'
             }, cb);
+          },
+          function (cb) {
+            var contacts = JSON.parse(localStorage.getItem('contacts'));
+            if (typeof contacts == 'undefined' || !Array.isArray(contacts) || !contacts.length) {
+              phonon.i18n().get(['no_contact_selected', 'error', 'ok'], function(values) {
+                phonon.alert(values['no_contact_selected'], values['error'], false, values['ok']);
+                cb(true);
+              });
+            }
+            cb(null);
           }
-        ], function () {
+        ], function (err) {
           if (!err) {
 
           }
