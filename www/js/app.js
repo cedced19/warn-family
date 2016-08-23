@@ -29,35 +29,47 @@ var requestPermission = function (permission, sentence, cb) {
   }, errorCallback);
 };
 
+// Define background function
+document.addEventListener('deviceready', function () {
+
+    phonon.i18n().get(['enabled_message', 'initialization'], function(values) {
+      cordova.plugins.backgroundMode.setDefaults({
+        title: values['enabled_message'],
+        text: values['initialization'] + '...'
+      });
+    });
+
+    cordova.plugins.backgroundMode.onactivate = function () {
+
+    };
+
+    cordova.plugins.backgroundMode.ondeactivate = function() {
+
+    };
+}, false);
+
 phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, readyDelay: 0}, function(activity) {
 
     activity.onCreate(function () {
-      var checkPermission = function (options, cb) {
-        console.log(cordova.plugins.permissions[options.permission])
-          cordova.plugins.permissions.hasPermission(cordova.plugins.permissions[options.permission], function (status) {
-            console.log(status)
+      var checkPermission = function (permission, errorSentence, cb) {
+          cordova.plugins.permissions.hasPermission(cordova.plugins.permissions[permission], function (status) {
             if(!status.hasPermission) {
-              requestPermission(cordova.plugins.permissions[options.permission], options.errorSentence, cb);
+              requestPermission(cordova.plugins.permissions[permission], errorSentence, cb);
             } else {
               cb(null);
             }
           }, null);
       };
-      // Request read contact permission
+
       var enableBtn = document.getElementById('enable-btn');
       enableBtn.onclick = function () {
+        // Request send SMS and Geolocation permission
         asyncWaterfall([
           function (cb) {
-            checkPermission({
-              permission: 'ACCESS_FINE_LOCATION',
-              errorSentence: 'no_other_permissions'
-            }, cb);
+            checkPermission('ACCESS_FINE_LOCATION', 'no_other_permissions', cb);
           },
           function (cb) {
-            checkPermission({
-              permission: 'SEND_SMS',
-              errorSentence: 'no_other_permissions'
-            }, cb);
+            checkPermission('SEND_SMS', 'no_other_permissions', cb);
           },
           function (cb) {
             var contacts = JSON.parse(localStorage.getItem('contacts'));
@@ -71,7 +83,8 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
           }
         ], function (err) {
           if (!err) {
-
+            cordova.plugins.backgroundMode.enable();
+            enableBtn.style.display = 'none';
           }
         });
       };

@@ -19,5 +19,7 @@
   "add_contact": "Add a contact",
   "selected_contacts": "Selected contacts",
   "enable_warning": "Enable the system",
-  "no_contact_selected": "No contact selected."
+  "no_contact_selected": "No contact selected.",
+  "enabled_message": "Sharing informations",
+  "initialization": "Initialization"
 }

@@ -19,5 +19,7 @@
   "add_contact": "Kontakt hinzufügen",
   "selected_contacts": "Ausgewählte Kontakte",
   "enable_warning": "Aktivieren Sie das Warnsystem",
-  "no_contact_selected": "Keine ausgewählte Kontakt."
+  "no_contact_selected": "Keine ausgewählte Kontakt.",
+  "enabled_message": "Gemeinsame Nutzung Informationen",
+  "initialization": "Initialisierung"
 }

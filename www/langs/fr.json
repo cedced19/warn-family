@@ -19,5 +19,7 @@
   "add_contact": "Ajouter un contact",
   "selected_contacts": "Contacts sélectionnés",
   "enable_warning": "Activer le système d'alerte",
-  "no_contact_selected": "Aucun contact séléctionné."
+  "no_contact_selected": "Aucun contact séléctionné.",
+  "enabled_message": "Partage des informations en cours",
+  "initialization": "Initialisation"
 }
