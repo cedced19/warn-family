@@ -23,29 +23,55 @@ var requestPermission = function (permission, sentence, cb) {
     });
   };
   cordova.plugins.permissions.requestPermission(permission, function (status) {
-    console.log(status)
       if(!status.hasPermission) errorCallback();
       cb(null);
   }, errorCallback);
 };
 
-// Define background function
 document.addEventListener('deviceready', function () {
+      // Send location to every contact selected
+      var sendLocation = function (location, cb) {
+        phonon.i18n().get('location_message', function(value) {
+          var contacts = JSON.parse(localStorage.getItem('contacts'));
+          var message = value + ': ' + location.latitude + ' ' + location.longitude + ' https://www.google.fr/maps/place/' + location.latitude + '+' + location.longitude;
+          contacts.forEach(function (contact) {
+            SMS.sendSMS(contact.phone, message, function () {}, console.warn);
+          });
+          cb();
+        });
+      };
 
-    phonon.i18n().get(['enabled_message', 'initialization'], function(values) {
-      cordova.plugins.backgroundMode.setDefaults({
-        title: values['enabled_message'],
-        text: values['initialization'] + '...'
+
+      // Define background function
+      var successCallback = function(location) {
+          sendLocation(location, function () {
+            backgroundGeolocation.finish();
+          });
+      };
+
+      var failureCallback = console.warn;
+
+      phonon.i18n().get('sharing_informations', function(value) {
+        backgroundGeolocation.configure(successCallback, failureCallback, {
+            interval: 150000,
+            fastestInterval: 30000,
+            activitiesInterval: 150000,
+            stopOnTerminate: false,
+            startOnBoot: false,
+            startForeground: true,
+            stopOnStillActivity: true,
+            locationProvider: backgroundGeolocation.provider.ANDROID_ACTIVITY_PROVIDER,
+            notificationTitle: 'Warn Family',
+            notificationText: value + '...',
+            notificationIconLarge: 'icon',
+            notificationIconSmall: 'icon',
+            stationaryRadius: 50,
+            distanceFilter: 50,
+            desiredAccuracy: 10,
+            debug: false,
+            saveBatteryOnBackground: false
+        });
       });
-    });
-
-    cordova.plugins.backgroundMode.onactivate = function () {
-
-    };
-
-    cordova.plugins.backgroundMode.ondeactivate = function() {
-
-    };
 }, false);
 
 phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, readyDelay: 0}, function(activity) {
@@ -62,6 +88,9 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
       };
 
       var enableBtn = document.getElementById('enable-btn');
+      var disableBtn = document.getElementById('disable-btn');
+      var watchId;
+
       enableBtn.onclick = function () {
         // Request send SMS and Geolocation permission
         asyncWaterfall([
@@ -78,16 +107,44 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
                 phonon.alert(values['no_contact_selected'], values['error'], false, values['ok']);
                 cb(true);
               });
+            } else {
+              cb(null);
             }
-            cb(null);
           }
         ], function (err) {
           if (!err) {
-            cordova.plugins.backgroundMode.enable();
-            enableBtn.style.display = 'none';
+            backgroundGeolocation.isLocationEnabled(function (enabled) {
+              if (enabled) {
+                backgroundGeolocation.start(function () {
+                  enableBtn.style.display = 'none';
+                  disableBtn.style.display = 'block';
+                  },
+                  function (error) {
+                    if (error.code === 2) {
+                      if (window.confirm('Not authorized for location updates. Would you like to open app settings?')) {
+                        backgroundGeolocation.showAppSettings();
+                      }
+                    } else {
+                      window.alert('Start failed: ' + error.message);
+                    }
+                });
+              } else {
+                // Location services are disabled
+                if (window.confirm('Location is disabled. Would you like to open location settings?')) {
+                  backgroundGeolocation.showLocationSettings();
+                }
+              }
+            });
           }
         });
       };
+
+      disableBtn.onclick = function () {
+        enableBtn.style.display = 'block';
+        disableBtn.style.display = 'none';
+        backgroundGeolocation.stop();
+      };
+
     });
 });
 

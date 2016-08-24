@@ -19,7 +19,8 @@
   "add_contact": "Kontakt hinzufügen",
   "selected_contacts": "Ausgewählte Kontakte",
   "enable_warning": "Aktivieren Sie das Warnsystem",
+  "disable_warning": "Deaktivieren Sie das Warnsystem",
   "no_contact_selected": "Keine ausgewählte Kontakt.",
-  "enabled_message": "Gemeinsame Nutzung Informationen",
-  "initialization": "Initialisierung"
+  "sharing_informations": "Gemeinsame Nutzung Informationen",
+  "location_message": "Ich bin gegenwärtig um diese GPS-Koordinaten"
 }

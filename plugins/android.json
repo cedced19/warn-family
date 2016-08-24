@@ -25,15 +25,14 @@
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "io.github.cedced19.warnfamily"
         },
-        "cordova-plugin-background-mode": {
+        "cordova-plugin-mauron85-background-geolocation": {
+            "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+            "CONTENT_AUTHORITY": "$PACKAGE_NAME",
             "PACKAGE_NAME": "io.github.cedced19.warnfamily"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.github.cedced19.warnfamily"
-        },
-        "cordova-plugin-device": {
             "PACKAGE_NAME": "io.github.cedced19.warnfamily"
         }
     }

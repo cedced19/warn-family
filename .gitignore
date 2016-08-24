@@ -4,7 +4,7 @@ plugins/cordova-plugin-sms/*
 plugins/cordova-plugin-compat/*
 plugins/cordova-plugin-contacts/*
 plugins/cordova-plugin-geolocation/*
-plugins/cordova-plugin-background-mode/*
+plugins/cordova-plugin-mauron85-background-geolocation/*
 plugins/cordova-plugin-device/*
 plugins/cordova-plugin-android-permissions/*
 plugins/cordova-plugin-statusbar/*

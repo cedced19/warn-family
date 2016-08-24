@@ -7,6 +7,7 @@
     <author email="cedced19@gmail.com" href="https://cedced19.github.io">
         Cédric Jung
     </author>
+    <icon src="res/icons/icon.png" />
     <platform name="android">
         <icon density="ldpi" src="res/icons/android/icon-36-ldpi.png" />
         <icon density="mdpi" src="res/icons/android/icon-48-mdpi.png" />
