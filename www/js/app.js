@@ -92,7 +92,7 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
       var watchId;
 
       enableBtn.onclick = function () {
-        // Request send SMS and Geolocation permission
+        // Request send SMS and Geolocation permission, check if there is contacts and if location enabled
         asyncWaterfall([
           function (cb) {
             checkPermission('ACCESS_FINE_LOCATION', 'no_other_permissions', cb);
@@ -110,35 +110,40 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
             } else {
               cb(null);
             }
-          }
-        ], function (err) {
-          if (!err) {
+          },
+          function (cb) {
             backgroundGeolocation.isLocationEnabled(function (enabled) {
               if (enabled) {
-                backgroundGeolocation.start(function () {
-                  enableBtn.style.display = 'none';
-                  disableBtn.style.display = 'block';
-                  },
-                  function (error) {
-                    // Location updates are not authorized
-                    if (error.code === 2) {
-                      phonon.i18n().get(['location_updates_not_authorized', 'error', 'ok', 'cancel'], function(values) {
-                        var confirm = phonon.confirm(values['location_updates_not_authorized'], values['error'], true, values['ok'], values['cancel']);
-                        confirm.on('confirm', function() {
-                          backgroundGeolocation.showAppSettings();
-                        });
-                      });
-                    }
-                });
+                cb(null);
               } else {
-                // Location services are disabled
                 phonon.i18n().get(['location_disabled', 'error', 'ok', 'cancel'], function(values) {
                   var confirm = phonon.confirm(values['location_disabled'], values['error'], true, values['ok'], values['cancel']);
                   confirm.on('confirm', function() {
                     backgroundGeolocation.showLocationSettings();
+                    cb(true);
+                  });
+                  confirm.on('cancel', function() {
+                    cb(true);
                   });
                 });
               }
+            });
+          }
+        ], function (err) {
+          if (!err) {
+            backgroundGeolocation.start(function () {
+              enableBtn.style.display = 'none';
+              disableBtn.style.display = 'block';
+              }, function (error) {
+                // Location updates are not authorized
+                if (error.code === 2) {
+                  phonon.i18n().get(['location_updates_not_authorized', 'error', 'ok', 'cancel'], function(values) {
+                    var confirm = phonon.confirm(values['location_updates_not_authorized'], values['error'], true, values['ok'], values['cancel']);
+                    confirm.on('confirm', function() {
+                      backgroundGeolocation.showAppSettings();
+                    });
+                  });
+                }
             });
           }
         });
