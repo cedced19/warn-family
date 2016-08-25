@@ -49,10 +49,8 @@ document.addEventListener('deviceready', function () {
           });
       };
 
-      var failureCallback = console.warn;
-
       phonon.i18n().get('sharing_informations', function(value) {
-        backgroundGeolocation.configure(successCallback, failureCallback, {
+        backgroundGeolocation.configure(successCallback, console.warn, {
             interval: 150000,
             fastestInterval: 30000,
             activitiesInterval: 150000,
@@ -89,7 +87,6 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
 
       var enableBtn = document.getElementById('enable-btn');
       var disableBtn = document.getElementById('disable-btn');
-      var watchId;
 
       enableBtn.onclick = function () {
         // Request send SMS and Geolocation permission, check if there is contacts and if location enabled
