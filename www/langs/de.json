@@ -24,5 +24,6 @@
   "sharing_informations": "Gemeinsame Nutzung Informationen",
   "location_message": "Ich bin gegenwärtig um diese GPS-Koordinaten",
   "location_disabled": "Die Lokalisierung ist deaktiviert. Möchten Sie die Einstellungen der Lokalisierung zu öffnen?",
-  "location_updates_not_authorized": "Die Lokalisierung-Updates sind nicht erlaubt. Möchten Sie die Einstellungen der Anmeldung zu öffnen?"
+  "location_updates_not_authorized": "Die Lokalisierung-Updates sind nicht erlaubt. Möchten Sie die Einstellungen der Anmeldung zu öffnen?",
+  "keep_a_contact": "Sie müssen zumindest einen Kontakt geben."
 }

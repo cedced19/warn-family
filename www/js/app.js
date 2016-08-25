@@ -172,9 +172,15 @@ phonon.navigator().on({page: 'number-list', content: 'number-list.html', prevent
         var a = document.createElement('a');
         a.className = 'pull-right icon icon-close';
         a.on('click', function () {
-          ul.removeChild(document.getElementById('contact-' + index));
-          contacts.splice(contacts.indexOf(value), 1);
-          localStorage.setItem('contacts', JSON.stringify(contacts));
+          if (contacts.length > 1) {
+            ul.removeChild(document.getElementById('contact-' + index));
+            contacts.splice(contacts.indexOf(value), 1);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+          } else {
+            phonon.i18n().get(['keep_a_contact', 'error', 'ok'], function(values) {
+              phonon.alert(values['keep_a_contact'], values['error'], false, values['ok']);
+            });
+          }
         });
         li.appendChild(a);
 
