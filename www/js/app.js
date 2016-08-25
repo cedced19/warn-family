@@ -120,19 +120,24 @@ phonon.navigator().on({page: 'home', content: 'home.html', preventClose: false, 
                   disableBtn.style.display = 'block';
                   },
                   function (error) {
+                    // Location updates are not authorized
                     if (error.code === 2) {
-                      if (window.confirm('Not authorized for location updates. Would you like to open app settings?')) {
-                        backgroundGeolocation.showAppSettings();
-                      }
-                    } else {
-                      window.alert('Start failed: ' + error.message);
+                      phonon.i18n().get(['location_updates_not_authorized', 'error', 'ok', 'cancel'], function(values) {
+                        var confirm = phonon.confirm(values['location_updates_not_authorized'], values['error'], true, values['ok'], values['cancel']);
+                        confirm.on('confirm', function() {
+                          backgroundGeolocation.showAppSettings();
+                        });
+                      });
                     }
                 });
               } else {
                 // Location services are disabled
-                if (window.confirm('Location is disabled. Would you like to open location settings?')) {
-                  backgroundGeolocation.showLocationSettings();
-                }
+                phonon.i18n().get(['location_disabled', 'error', 'ok', 'cancel'], function(values) {
+                  var confirm = phonon.confirm(values['location_disabled'], values['error'], true, values['ok'], values['cancel']);
+                  confirm.on('confirm', function() {
+                    backgroundGeolocation.showLocationSettings();
+                  });
+                });
               }
             });
           }

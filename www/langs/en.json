@@ -22,5 +22,7 @@
   "disable_warning": "Disable the system",
   "no_contact_selected": "No contact selected.",
   "sharing_informations": "Sharing informations",
-  "location_message": "I am currently in the following GPS coordinates"
+  "location_message": "I am currently in the following GPS coordinates",
+  "location_disabled": "Location is disabled. Would you like to open location settings?",
+  "location_updates_not_authorized": "Not authorized for location updates. Would you like to open app settings?"
 }

@@ -22,5 +22,7 @@
   "disable_warning": "Desactiver le système d'alerte",
   "no_contact_selected": "Aucun contact séléctionné.",
   "sharing_informations": "Partage des informations en cours",
-  "location_message": "Je suis actuellement aux coordonnées GPS suivante"
+  "location_message": "Je suis actuellement aux coordonnées GPS suivante",
+  "location_disabled": "La localisation est désactivé. Voulez-vous ouvrir les paramètres de géolocalisation?",
+  "location_updates_not_authorized": "Les mises à jour de localisation ne sont pas autoriser. Voulez-vous ouvrir paramètres de l'application?"
 }
