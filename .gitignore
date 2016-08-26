@@ -9,3 +9,5 @@ plugins/cordova-plugin-device/*
 plugins/cordova-plugin-android-permissions/*
 plugins/cordova-plugin-statusbar/*
 node_modules/
+warn-family.keystore
+build.json
