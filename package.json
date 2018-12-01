@@ -1,0 +1,13 @@
+{
+  "name": "io.github.cedced19.warnfamily",
+  "version": "0.0.1",
+  "displayName": "Warn Family",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "~5.1.1"
+  }
+}
